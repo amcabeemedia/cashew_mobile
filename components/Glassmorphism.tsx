@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 
-export function BlurCard({ children, varient }: { children: React.ReactNode, varient: 'wide' | 'medium' }) {
+export function BlurCard({ children, varient, onPress }: { children: React.ReactNode, varient: 'wide' | 'medium', onPress: () => void }) {
     const [tint, setTint] = useState<BlurTint>("systemThickMaterialLight");
     const [intensity, setIntensity] = useState< number | undefined>(30);
   
@@ -20,7 +20,7 @@ export function BlurCard({ children, varient }: { children: React.ReactNode, var
     }
   
     return (
-        <View style={varient === 'wide' ? styles.shadowContainerWide : styles.shadowContainer }>
+        <View style={varient === 'wide' ? styles.shadowContainerWide : styles.shadowContainer } onTouchEnd={onPress}>
           <BlurView
             intensity={intensity}
             onTouchStart={handleTouchStart}
@@ -34,22 +34,22 @@ export function BlurCard({ children, varient }: { children: React.ReactNode, var
     );
 }
 
-export function BlurPill({ children, dropdownTitle }: { children: React.ReactNode, dropdownTitle: string }) {
+export function BlurPill({ children, dropdownTitle, onPress }: { children: React.ReactNode, dropdownTitle: string, onPress: () => void }) {
   const [tint, setTint] = useState<BlurTint>("systemThickMaterialLight");
-  const [intensity, setIntensity] = useState< number | undefined>(10);
+  const [intensity, setIntensity] = useState< number | undefined>(40);
 
   function handleTouchStart() {
     setTint("systemThickMaterialLight");
-    setIntensity(40);
+    setIntensity(60);
   }
 
   function handleTouchEnd() {
     setTint("systemThickMaterialLight");
-    setIntensity(30);
+    setIntensity(40);
   }
 
   return (
-      <View style={styles.shadowContainerPill }>
+      <View style={styles.shadowContainerPill } onTouchEnd={onPress}>
         <View style={styles.subPillContainer}>
           <Text style={{color: 'white'}}>{dropdownTitle}</Text>
           <Ionicons name="chevron-down" size={12} color="white" />

@@ -1,19 +1,34 @@
 import NavButton from "@/components/Button";
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack } from "expo-router";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 
 export default function RootLayout() {
   return (
     <View style={{ flex: 1  }}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="camera" />
-        <Stack.Screen name="+not-found" />
-      </Stack>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen name="camera" />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+      </GestureHandlerRootView>
       <View style={styles.buttonContainer}>
-          <NavButton href="/camera">menu</NavButton>
-          <NavButton href="/">camera</NavButton>
-        </View>
+          <NavButton href="/" width={120}>
+            <View className="flex-row items-center justify-center space-x-2 h-full w-auto">
+              <Ionicons name="menu" size={12} color="white" />
+              <Text className="text-white">menu</Text>
+            </View>
+          </NavButton>
+          <NavButton href="/camera" width={120}>
+            <View className="flex-row items-center justify-center space-x-2 h-full w-auto">
+              <Ionicons name="camera" size={12} color="white" />
+              <Text className="text-white">capture</Text>
+            </View>
+          </NavButton>
+      </View>
     </View>
   );
 }
